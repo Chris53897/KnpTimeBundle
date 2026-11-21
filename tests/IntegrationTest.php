@@ -11,6 +11,7 @@ use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\Log\Logger;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
@@ -105,6 +106,10 @@ abstract class AbstractTimeBundleIntegrationTestKernel extends Kernel
         $container->register('logger', Logger::class)
             ->setArgument(0, LogLevel::EMERGENCY);
         $container->setAlias('public.twig', new Alias('twig', true));
+        // Symfony 8.1+ only registers "event_dispatcher" when symfony/event-dispatcher is a non-dev dependency
+        if (!$container->has('event_dispatcher')) {
+            $container->register('event_dispatcher', EventDispatcher::class);
+        }
     }
 
     public function getCacheDir(): string

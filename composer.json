@@ -26,7 +26,6 @@
 
     "require-dev": {
         "symfony/framework-bundle": "^5.4|^6.0|^7.0|^8.0",
-        "symfony/event-dispatcher": "^5.4|^6.0|^7.0|^8.0",
         "symfony/phpunit-bridge": "^5.4|^6.0|^7.0|^8.0",
         "symfony/twig-bundle": "^5.4|^6.0|^7.0|^8.0",
         "phpstan/phpstan": "^1.11",
